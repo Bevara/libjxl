@@ -5,6 +5,10 @@ include(filters.cmake)
 
 add_definitions(-fpic)
 
+set(CMAKE_BUILD_TYPE Release)
+set(CMAKE_CXX_FLAGS "-O3 -Wall -Wextra")
+set(CMAKE_C_FLAGS "-O3 -Wall -Wextra")
+
 SET(LIBJXL_SRC
         ${CMAKE_CURRENT_SOURCE_DIR}/reframe_jxl.c
         ${CMAKE_CURRENT_SOURCE_DIR}/dec_jxl.c

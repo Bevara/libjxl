@@ -45,7 +45,7 @@ static GF_Err jxldec_configure_pid(GF_Filter *filter, GF_FilterPid *pid, Bool is
     // copy properties at init or reconfig
     gf_filter_pid_copy_properties(ctx->opid, ctx->ipid);
     gf_filter_pid_set_property(ctx->opid, GF_PROP_PID_CODECID, &PROP_UINT(GF_CODECID_RAW));
-    
+
     if (!ctx->ofmt) {
         ctx->ofmt = GF_PIXEL_RGBA;
         gf_filter_pid_set_property(ctx->opid, GF_PROP_PID_PIXFMT, &PROP_UINT(GF_PIXEL_RGBA));
@@ -111,7 +111,7 @@ static GF_Err jxldec_process(GF_Filter *filter)
         break;
     }
 
-    
+
     format.data_type = storageFormat;
     format.endianness = JXL_NATIVE_ENDIAN;
     format.align = 0;
@@ -271,4 +271,11 @@ const GF_FilterRegister * EMSCRIPTEN_KEEPALIVE dynCall_jxldec_register(GF_Filter
 
 void abort() {
   _Exit(1);
+}
+
+
+#include "filter_register.h"
+__attribute__((constructor))
+void register_jxldec(void) {
+    gf_filter_auto_register("jxldec", dynCall_jxldec_register);
 }

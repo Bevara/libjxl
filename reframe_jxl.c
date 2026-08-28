@@ -297,3 +297,10 @@ const GF_FilterRegister * EMSCRIPTEN_KEEPALIVE dynCall_jxl_reframe_register(GF_F
 {
 	return &ReframeJxlRegister;
 }
+
+
+#include "filter_register.h"
+__attribute__((constructor))
+void register_jxl_reframe(void) {
+    gf_filter_auto_register("jxl_reframe", dynCall_jxl_reframe_register);
+}

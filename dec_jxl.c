@@ -46,9 +46,14 @@ static GF_Err jxldec_configure_pid(GF_Filter *filter, GF_FilterPid *pid, Bool is
     gf_filter_pid_copy_properties(ctx->opid, ctx->ipid);
     gf_filter_pid_set_property(ctx->opid, GF_PROP_PID_CODECID, &PROP_UINT(GF_CODECID_RAW));
 
+    /* KNOWN LIMITATION: "out=rgba" fails the same way here as in libpng's
+     * dec_png.c (GPAC's initial filter graph resolution only reads the static
+     * JXLDecCaps table, never reconfigure_output, so it can't find a path to
+     * writegen). See test-player/libpng.js for the full note and why declaring
+     * PIXFMT alternatives in the static caps made things worse when tried. */
     if (!ctx->ofmt) {
-        ctx->ofmt = GF_PIXEL_RGBA;
-        gf_filter_pid_set_property(ctx->opid, GF_PROP_PID_PIXFMT, &PROP_UINT(GF_PIXEL_RGBA));
+        ctx->ofmt = GF_PIXEL_RGB;
+        gf_filter_pid_set_property(ctx->opid, GF_PROP_PID_PIXFMT, &PROP_UINT(GF_PIXEL_RGB));
     }else{
         gf_filter_pid_set_property(ctx->opid, GF_PROP_PID_PIXFMT, &PROP_UINT(ctx->ofmt));
     }
@@ -72,7 +77,9 @@ static GF_Err jxldec_process(GF_Filter *filter)
 
     GF_Err e;
     GF_FilterPacket *pck;
+    GF_FilterPacket *dst_pck = NULL;
     u8 *data;
+    u8 *output;
     u32 size;
     GF_JXLDecCtx *ctx = (GF_JXLDecCtx *)gf_filter_get_udta(filter);
 
@@ -141,9 +148,6 @@ static GF_Err jxldec_process(GF_Filter *filter)
 
     while (1)
     {
-        GF_FilterPacket *dst_pck;
-        u8 *output;
-
         status = JxlDecoderProcessInput(decoder);
         if (JXL_DEC_SUCCESS == status)
         {

@@ -38,3 +38,4 @@ add_filter(libjxl
 # the specific (fixed, small) test inputs used, and prunes it away along
 # with the symbol libjxl_1 needs to import. -O0 keeps every call site real.
 set_source_files_properties(libcxx_compat_shim.cpp PROPERTIES COMPILE_FLAGS "-O0")
+target_compile_features(libjxl_1 PRIVATE cxx_std_20)

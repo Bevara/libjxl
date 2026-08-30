@@ -33,6 +33,7 @@
 #include <algorithm>
 #include <cmath>
 #include <string>
+#include <functional>
 
 /* noinline + a runtime-only length parameter (n): the compiler compiles
  * these in complete isolation, with no visibility into what the (never

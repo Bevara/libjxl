@@ -293,7 +293,7 @@ GF_FilterRegister ReframeJxlRegister = {
 	.process = rfjxl_process,
 	.process_event = rfjxl_process_event};
 
-const GF_FilterRegister * EMSCRIPTEN_KEEPALIVE dynCall_jxl_reframe_register(GF_FilterSession *session)
+const GF_FilterRegister * EMSCRIPTEN_KEEPALIVE jxl_reframe_register(GF_FilterSession *session)
 {
 	return &ReframeJxlRegister;
 }
@@ -302,5 +302,5 @@ const GF_FilterRegister * EMSCRIPTEN_KEEPALIVE dynCall_jxl_reframe_register(GF_F
 #include "filter_register.h"
 __attribute__((constructor))
 void register_jxl_reframe(void) {
-    gf_filter_auto_register("jxl_reframe", dynCall_jxl_reframe_register);
+    gf_filter_auto_register("jxl_reframe", jxl_reframe_register);
 }

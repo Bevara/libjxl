@@ -268,7 +268,7 @@ GF_FilterRegister JXLDecoderRegister = {
     .process = jxldec_process,
 };
 
-const GF_FilterRegister * EMSCRIPTEN_KEEPALIVE dynCall_jxldec_register(GF_FilterSession *session)
+const GF_FilterRegister * EMSCRIPTEN_KEEPALIVE jxldec_register(GF_FilterSession *session)
 {
     return &JXLDecoderRegister;
 }
@@ -281,5 +281,5 @@ void abort() {
 #include "filter_register.h"
 __attribute__((constructor))
 void register_jxldec(void) {
-    gf_filter_auto_register("jxldec", dynCall_jxldec_register);
+    gf_filter_auto_register("jxldec", jxldec_register);
 }

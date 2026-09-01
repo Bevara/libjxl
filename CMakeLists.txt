@@ -11,13 +11,16 @@ SET(LIBJXL_SRC
         ${CMAKE_CURRENT_SOURCE_DIR}/libcxx_compat_shim.cpp
 )
 
+# No libc++/libc++abi here: the C++ runtime comes from the solver. Two copies
+# in one process do not share libc++'s static state and the vtables do not
+# survive crossing the module boundary - that is what made libheif abort at
+# load with "null function" in codecvt::encoding. See
+# filters/libheif/CMakeLists.txt.
 SET(LIBJXL_LIB
         ${CMAKE_CURRENT_SOURCE_DIR}/lib/libjxl.a
         ${CMAKE_CURRENT_SOURCE_DIR}/lib/libhwy.a
         ${CMAKE_CURRENT_SOURCE_DIR}/lib/libbrotlicommon.a
         ${CMAKE_CURRENT_SOURCE_DIR}/lib/libbrotlidec.a
-        ${CMAKE_CURRENT_SOURCE_DIR}/lib/libc++.a
-        ${CMAKE_CURRENT_SOURCE_DIR}/lib/libc++abi.a
 )
 
 SET(LIBJXL_INC

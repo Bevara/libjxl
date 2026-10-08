@@ -14,5 +14,6 @@
     "extension":{
       "jxl" : "img"
     },
-    "licence_required":false
+    "licence_required":false,
+    "using": ["solver_minimal_1"]
 }

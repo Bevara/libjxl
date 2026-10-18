@@ -1,6 +1,6 @@
 {
     "name": "libjxl",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "JXL decoder",
     "filters":["jxldec","rfjxl"],
     "help": "This filter decodes JXL images using libjxl.",
@@ -15,7 +15,7 @@
     "extension":{
       "jxl" : "img"
     },
-    "using": ["solver_minimal_1"],
+    "using": ["solver_minimal_1", "solver_1"],
     "runtime": {
         "jxldec": {
             "outputs": [

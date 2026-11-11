@@ -2,20 +2,30 @@
     "name": "libjxl",
     "version": "1.0.3",
     "description": "JXL decoder",
-    "filters":["jxldec","rfjxl"],
+    "filters": [
+        "jxldec",
+        "rfjxl"
+    ],
     "help": "This filter decodes JXL images using libjxl.",
     "support": [
         "image"
     ],
-    "sources":"https://bevara.ddns.net/sources/libjxl.accessor",
-    "filter_source":{
-        "jxldec" : "dec_jxl.c",
-        "rfjxl" : "reframe_jxl.c"
+    "sources": "https://bevara.ddns.net/sources/libjxl.accessor",
+    "filter_source": {
+        "jxldec": "dec_jxl.c",
+        "rfjxl": "reframe_jxl.c"
     },
-    "extension":{
-      "jxl" : "img"
+    "extension": {
+        "jxl": "img"
     },
-    "using": ["mm_solver_minimal_1.0.1", "mm_solver_1.0.1", "mm_solver_1.0.2", "mm_solver_1.0.3", "mm_solver_1.0.4"],
+    "using": [
+        "mm_solver_minimal_1.0.1",
+        "mm_solver_1.0.1",
+        "mm_solver_1.0.2",
+        "mm_solver_1.0.3",
+        "mm_solver_1.0.4",
+        "mm_solver_1.0.5"
+    ],
     "runtime": {
         "jxldec": {
             "outputs": [
